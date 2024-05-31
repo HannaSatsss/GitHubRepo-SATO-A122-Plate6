@@ -42,30 +42,30 @@ public class SATO_num8 {
         return isIsomorphic(new ArrayList<>(satoAdjList2.keySet()), new ArrayList<>(satoAdjList2.keySet()), satoMapping);
     }
 
-    private static boolean isIsomorphic(List<Integer> satoNodes1, List<Integer> satoNodes2, Map<Integer, Integer> alovera_mapping) {
+    private static boolean isIsomorphic(List<Integer> satoNodes1, List<Integer> satoNodes2, Map<Integer, Integer> satoMapping) {
         if (satoAdjList2.isEmpty() && satoNodes2.isEmpty()) return true;
         if (satoAdjList2.size()!= satoNodes2.size()) return false;
 
         int satoNode1 = satoNodes1.get(0);
         for (int satoNode2 : satoNodes2) {
-            if (isValidMapping(satoNode1, satoNode2, alovera_mapping)) {
-                alovera_mapping.put(satoNode1, satoNode2);
+            if (isValidMapping(satoNode1, satoNode2, satoMapping)) {
+                satoMapping.put(satoNode1, satoNode2);
                 List<Integer> satoNextNodes1 = new ArrayList<>(satoNodes1);
                 List<Integer> satoNextNodes2 = new ArrayList<>(satoNodes2);
                 satoNextNodes1.remove(Integer.valueOf(satoNode1));
                 satoNextNodes2.remove(Integer.valueOf(satoNode2));
-                if (isIsomorphic(satoNextNodes1, satoNextNodes2, alovera_mapping)) return true;
-                alovera_mapping.remove(satoNode1);
+                if (isIsomorphic(satoNextNodes1, satoNextNodes2, satoMapping)) return true;
+                satoMapping.remove(satoNode1);
             }
         }
         return false;
     }
 
-    private static boolean isValidMapping(int alovera_node1, int alovera_node2, Map<Integer, Integer> alovera_mapping) {
-        for (int alovera_neighbor1 : satoAdjList1.get(alovera_node1)) {
-            if (alovera_mapping.containsKey(alovera_neighbor1)) {
-                int alovera_neighbor2 = alovera_mapping.get(alovera_neighbor1);
-                if (!satoAdjList2.get(alovera_node2).contains(alovera_neighbor2)) return false;
+    private static boolean isValidMapping(int sato_node1, int sato_node2, Map<Integer, Integer> sato_mapping) {
+        for (int sato_neighbor1 : satoAdjList1.get(sato_node1)) {
+            if (sato_mapping.containsKey(sato_neighbor1)) {
+                int sato_neighbor2 = sato_mapping.get(sato_neighbor1);
+                if (!satoAdjList2.get(sato_node2).contains(sato_neighbor2)) return false;
             }
         }
         return true;
